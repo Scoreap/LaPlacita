@@ -823,6 +823,46 @@ section {
   color: var(--color-text);
 }
 
+.admin-login-error {
+  font-size: 0.85rem;
+
+  color: #c0392b;
+
+  margin: -0.75rem 0 1.5rem;
+}
+
+.admin-password-field {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.admin-password-field input {
+  padding-right: 4.5rem;
+}
+
+.admin-password-toggle {
+  position: absolute;
+
+  right: 0.9rem;
+
+  background: none;
+
+  border: none;
+
+  padding: 0;
+
+  font-size: 0.75rem;
+
+  font-weight: 700;
+
+  color: var(--color-primary);
+
+  cursor: pointer;
+}
+
 .admin-form-group input,
 .admin-form-group textarea,
 .admin-form-group select {

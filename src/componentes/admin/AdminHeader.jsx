@@ -1,4 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 function AdminHeader() {
+  const navigate = useNavigate();
+
+  function handleLogout() {
+    sessionStorage.removeItem("admin-auth");
+    navigate("/admin/login");
+  }
+
   return (
     <header className="admin-header">
 
@@ -14,7 +23,7 @@ function AdminHeader() {
             Administrador
           </span>
 
-          <button className="admin-logout-button">
+          <button className="admin-logout-button" onClick={handleLogout}>
             Cerrar sesión
           </button>
 
