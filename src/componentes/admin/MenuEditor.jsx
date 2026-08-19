@@ -39,27 +39,46 @@ function MenuEditor({ dishes, onEdit, onDelete }) {
 
       <div className="menu-editor-filters">
 
-        <input
-          type="search"
-          className="menu-editor-search"
-          placeholder="Buscar platillo por nombre..."
-          value={search}
-          onChange={(event) => setSearch(event.target.value)}
-        />
-
-        <select
-          className="menu-editor-category-filter"
-          value={category}
-          onChange={(event) => setCategory(event.target.value)}
-        >
+        <div className="menu-editor-category-buttons">
 
           {CATEGORY_FILTERS.map((option) => (
-            <option key={option} value={option}>
+            <button
+              key={option}
+              type="button"
+              className={
+                "menu-editor-category-button" +
+                (category === option ? " is-active" : "")
+              }
+              onClick={() => setCategory(option)}
+            >
               {option}
-            </option>
+            </button>
           ))}
 
-        </select>
+        </div>
+
+        <div className="menu-editor-search-field">
+
+          <input
+            type="text"
+            className="menu-editor-search"
+            placeholder="Buscar platillo por nombre..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+          />
+
+          {search && (
+            <button
+              type="button"
+              className="menu-editor-search-clear"
+              onClick={() => setSearch("")}
+              aria-label="Limpiar búsqueda"
+            >
+              ×
+            </button>
+          )}
+
+        </div>
 
       </div>
 
