@@ -1,9 +1,13 @@
-function AdminMenuCard() {
+function AdminMenuCard({ dish, onEdit, onDelete }) {
   return (
     <article className="admin-menu-card">
 
       <div className="admin-menu-image">
-        Imagen
+        {dish.image ? (
+          <img src={dish.image} alt={dish.name} />
+        ) : (
+          "Imagen"
+        )}
       </div>
 
 
@@ -12,22 +16,22 @@ function AdminMenuCard() {
         <div className="admin-menu-main">
 
           <span className="admin-menu-category">
-            DESAYUNOS
+            {dish.category.toUpperCase()}
           </span>
 
           <h3>
-            Platillo de ejemplo
+            {dish.name}
           </h3>
 
           <p>
-            Descripción del platillo.
+            {dish.description}
           </p>
 
         </div>
 
 
         <div className="admin-menu-price">
-          Q 00.00
+          Q {dish.price.toFixed(2)}
         </div>
 
       </div>
@@ -35,11 +39,11 @@ function AdminMenuCard() {
 
       <div className="admin-menu-actions">
 
-        <button className="admin-edit-button">
+        <button className="admin-edit-button" onClick={() => onEdit(dish)}>
           Editar
         </button>
 
-        <button className="admin-delete-button">
+        <button className="admin-delete-button" onClick={() => onDelete(dish.id)}>
           Eliminar
         </button>
 

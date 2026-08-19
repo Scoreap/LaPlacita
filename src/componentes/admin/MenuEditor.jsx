@@ -1,6 +1,6 @@
 import AdminMenuCard from "./AdminMenuCard";
 
-function MenuEditor() {
+function MenuEditor({ dishes, onEdit, onDelete }) {
   return (
     <section className="menu-editor">
 
@@ -18,21 +18,30 @@ function MenuEditor() {
         </div>
 
         <span>
-          3 platillos
+          {dishes.length} {dishes.length === 1 ? "platillo" : "platillos"}
         </span>
 
       </div>
 
 
-      <div className="admin-menu-list">
+      {dishes.length === 0 ? (
+        <p className="admin-menu-empty">
+          Todavía no hay platillos. Usa "+ Agregar platillo" para crear el primero.
+        </p>
+      ) : (
+        <div className="admin-menu-list">
 
-        <AdminMenuCard />
+          {dishes.map((dish) => (
+            <AdminMenuCard
+              key={dish.id}
+              dish={dish}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
+          ))}
 
-        <AdminMenuCard />
-
-        <AdminMenuCard />
-
-      </div>
+        </div>
+      )}
 
     </section>
   );
