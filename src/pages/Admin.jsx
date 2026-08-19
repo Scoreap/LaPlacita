@@ -81,7 +81,7 @@ function Admin() {
 
             <p>
               Administra los platillos y precios
-              de La Placita.
+              del restaurante.
             </p>
           </div>
 

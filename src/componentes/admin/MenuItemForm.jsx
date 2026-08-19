@@ -1,12 +1,5 @@
 import { useState } from "react";
-
-const CATEGORIES = [
-  "Desayuno",
-  "Almuerzo-Cena",
-  "Bebida",
-  "Entrada",
-  "Extra",
-];
+import { CATEGORIES } from "../../constants/categories";
 
 const emptyDish = {
   name: "",
