@@ -16,7 +16,7 @@ const emptyDish = {
   image: null,
 };
 
-function MenuItemForm({ initialValues, onSubmit, onCancel }) {
+function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
   const isEditing = Boolean(initialValues);
 
   const [name, setName] = useState(initialValues?.name ?? emptyDish.name);
@@ -179,12 +179,12 @@ function MenuItemForm({ initialValues, onSubmit, onCancel }) {
 
         <div className="admin-form-actions">
 
-          <button type="button" className="admin-cancel-button" onClick={onCancel}>
+          <button type="button" className="admin-cancel-button" onClick={onCancel} disabled={isSaving}>
             Cancelar
           </button>
 
-          <button type="submit" className="admin-primary-button">
-            Guardar
+          <button type="submit" className="admin-primary-button" disabled={isSaving}>
+            {isSaving ? "Guardando..." : "Guardar"}
           </button>
 
         </div>
