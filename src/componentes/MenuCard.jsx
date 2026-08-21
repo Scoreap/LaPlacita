@@ -1,21 +1,27 @@
-function MenuCard() {
+function MenuCard({ dish }) {
+  const { name, description, price, image } = dish;
+
   return (
     <article className="menu-card">
 
       <div className="menu-card-image">
-        Foto del platillo
+        {image ? (
+          <img src={image} alt={name} loading="lazy" />
+        ) : (
+          <span>Foto del platillo</span>
+        )}
       </div>
 
       <div className="menu-card-content">
 
         <div className="menu-card-header">
-          <h3>Nombre del platillo</h3>
+          <h3>{name}</h3>
 
-          <span>Q 00.00</span>
+          <span>Q {Number(price).toFixed(2)}</span>
         </div>
 
         <p>
-          Descripción breve del platillo.
+          {description}
         </p>
 
       </div>

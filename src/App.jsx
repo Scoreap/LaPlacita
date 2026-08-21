@@ -1,10 +1,20 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Menu from "./pages/Menu";
 import Contact from "./pages/Contact";
 import Admin from "./pages/Admin";
 import AdminLogin from "./pages/AdminLogin";
+
+function RequireAdminAuth({ children }) {
+  const isAuthenticated = sessionStorage.getItem("admin-auth") === "true";
+
+  if (!isAuthenticated) {
+    return <Navigate to="/admin/login" replace />;
+  }
+
+  return children;
+}
 
 function App() {
   return (
@@ -25,7 +35,11 @@ function App() {
         />
         <Route
           path="/admin"
-          element={<Admin />}
+          element={
+            <RequireAdminAuth>
+              <Admin />
+            </RequireAdminAuth>
+          }
         />
       </Routes>
     </BrowserRouter>

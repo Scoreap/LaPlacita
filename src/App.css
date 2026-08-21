@@ -823,6 +823,46 @@ section {
   color: var(--color-text);
 }
 
+.admin-login-error {
+  font-size: 0.85rem;
+
+  color: #c0392b;
+
+  margin: -0.75rem 0 1.5rem;
+}
+
+.admin-password-field {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+}
+
+.admin-password-field input {
+  padding-right: 4.5rem;
+}
+
+.admin-password-toggle {
+  position: absolute;
+
+  right: 0.9rem;
+
+  background: none;
+
+  border: none;
+
+  padding: 0;
+
+  font-size: 0.75rem;
+
+  font-weight: 700;
+
+  color: var(--color-primary);
+
+  cursor: pointer;
+}
+
 .admin-form-group input,
 .admin-form-group textarea,
 .admin-form-group select {
@@ -1054,6 +1094,130 @@ section {
 }
 
 
+.menu-editor-filters {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 1rem;
+
+  padding: 1.5rem 2rem;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.menu-editor-category-buttons {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 0.6rem;
+}
+
+.menu-editor-category-button {
+  border: 1px solid var(--color-border);
+
+  background: transparent;
+
+  color: var(--color-text);
+
+  padding: 0.55rem 1.1rem;
+
+  border-radius: 999px;
+
+  font-size: 0.8rem;
+
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.menu-editor-category-button:hover {
+  border-color: var(--color-primary);
+
+  color: var(--color-primary);
+}
+
+.menu-editor-category-button.is-active {
+  background: var(--color-primary);
+
+  color: white;
+
+  border-color: var(--color-primary);
+}
+
+.menu-editor-search-field {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  flex: 1;
+
+  min-width: 220px;
+
+  max-width: 320px;
+}
+
+.menu-editor-search {
+  width: 100%;
+
+  padding: 0.65rem 2.5rem 0.65rem 1.2rem;
+
+  border: 1px solid var(--color-border);
+
+  background: var(--color-background);
+
+  color: var(--color-text);
+
+  outline: none;
+
+  border-radius: 999px;
+}
+
+.menu-editor-search:focus {
+  border-color: var(--color-primary);
+}
+
+.menu-editor-search-clear {
+  position: absolute;
+
+  right: 0.8rem;
+
+  background: none;
+
+  border: none;
+
+  padding: 0;
+
+  width: 1.5rem;
+
+  height: 1.5rem;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.2rem;
+
+  line-height: 1;
+
+  color: var(--color-text-light);
+
+  cursor: pointer;
+}
+
+.menu-editor-search-clear:hover {
+  color: var(--color-primary);
+}
+
+
 /* =====================================================
    ADMIN MENU CARD
 ===================================================== */
@@ -1239,6 +1403,122 @@ section {
   border: 1px solid var(--color-border);
 
   background: transparent;
+
+  cursor: pointer;
+}
+
+.admin-menu-image img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.admin-menu-empty {
+  padding: 3rem 2rem;
+
+  text-align: center;
+
+  color: var(--color-text-light);
+}
+
+
+/* =====================================================
+   IMAGE UPLOAD
+===================================================== */
+
+.admin-image-upload {
+  display: flex;
+
+  align-items: center;
+
+  gap: 1.2rem;
+}
+
+.admin-image-preview {
+  width: 100px;
+
+  aspect-ratio: 1;
+
+  flex-shrink: 0;
+
+  background: #ddd6ce;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #777;
+
+  font-size: 0.7rem;
+
+  text-align: center;
+
+  overflow: hidden;
+}
+
+.admin-image-preview img {
+  width: 100%;
+
+  height: 100%;
+
+  object-fit: cover;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.admin-modal-overlay {
+  position: fixed;
+
+  inset: 0;
+
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 3rem 1.5rem;
+
+  overflow-y: auto;
+
+  z-index: 100;
+}
+
+.admin-modal {
+  position: relative;
+
+  width: 100%;
+
+  max-width: 700px;
+}
+
+.admin-modal .menu-item-form {
+  max-width: none;
+}
+
+.admin-modal-close {
+  position: absolute;
+
+  top: -2.5rem;
+
+  right: 0;
+
+  background: none;
+
+  border: none;
+
+  color: white;
+
+  font-size: 2rem;
+
+  line-height: 1;
 
   cursor: pointer;
 }

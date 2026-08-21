@@ -1,6 +1,11 @@
-function CategoryButton({ children }) {
+function CategoryButton({ children, active, onClick }) {
   return (
-    <button className="category-button">
+    <button
+      type="button"
+      className={`category-button${active ? " is-active" : ""}`}
+      onClick={onClick}
+      aria-pressed={active}
+    >
       {children}
     </button>
   );
