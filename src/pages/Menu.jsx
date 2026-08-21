@@ -1,9 +1,37 @@
+import { useEffect, useState } from "react";
 import Navbar from "../componentes/Navbar";
 import Footer from "../componentes/Footer";
 import CategoryButton from "../componentes/CategoryButton";
 import MenuGrid from "../componentes/MenuGrid";
-
+import Loading from "../componentes/Loading";
+import ErrorMessage from "../componentes/ErrorMessage";
+import { CATEGORIES } from "../constants/categories";
+import { subscribeToDishes } from "../services/dishesService";
 function Menu() {
+    const [dishes, setDishes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedCategory, setSelectedCategory] = useState("Todos");
+
+  useEffect(() => {
+    const unsubscribe = subscribeToDishes(
+      (data) => {
+        setDishes(data);
+        setLoading(false);
+      },
+      () => {
+        setError("No pudimos cargar el menú. Intenta de nuevo.");
+        setLoading(false);
+      }
+    );
+
+    return () => unsubscribe();
+  }, []);
+
+  const filteredDishes =
+    selectedCategory === "Todos"
+      ? dishes
+      : dishes.filter((dish) => dish.category === selectedCategory);
   return (
     <div className="page">
 
@@ -34,32 +62,38 @@ function Menu() {
 
           <div className="menu-categories">
 
-            <CategoryButton>
+            <CategoryButton
+              active={selectedCategory === "Todos"}
+              onClick={() => setSelectedCategory("Todos")}
+            >
               Todos
             </CategoryButton>
 
-            <CategoryButton>
-              Desayunos
-            </CategoryButton>
-
-            <CategoryButton>
-              Almuerzos
-            </CategoryButton>
-
-            <CategoryButton>
-              Bebidas
-            </CategoryButton>
-
-            <CategoryButton>
-              Postres
-            </CategoryButton>
+            {CATEGORIES.map((category) => (
+              <CategoryButton
+                key={category}
+                active={selectedCategory === category}
+                onClick={() => setSelectedCategory(category)}
+              >
+                {category}
+              </CategoryButton>
+            ))}
 
           </div>
 
 
-          {/* MENU GRID */}
+{/* ESTADOS: carga, error o menú */}
 
-          <MenuGrid />
+{loading && <Loading />}
+
+{!loading && error && (
+  <ErrorMessage
+    message={error}
+    onRetry={() => window.location.reload()}
+  />
+)}
+
+{!loading && !error && <MenuGrid dishes={filteredDishes} />}
 
         </section>
 
