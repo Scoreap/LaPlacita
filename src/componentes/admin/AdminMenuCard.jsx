@@ -1,6 +1,8 @@
-function AdminMenuCard({ dish, onEdit, onDelete }) {
+function AdminMenuCard({ dish, onEdit, onDelete, onToggleVisibility }) {
+  const isVisible = dish.visible !== false;
+
   return (
-    <article className="admin-menu-card">
+    <article className={"admin-menu-card" + (isVisible ? "" : " is-hidden")}>
 
       <div className="admin-menu-image">
         {dish.image ? (
@@ -39,13 +41,34 @@ function AdminMenuCard({ dish, onEdit, onDelete }) {
 
       <div className="admin-menu-actions">
 
-        <button className="admin-edit-button" onClick={() => onEdit(dish)}>
-          Editar
-        </button>
+        <div className="admin-menu-visibility">
 
-        <button className="admin-delete-button" onClick={() => onDelete(dish.id)}>
-          Eliminar
-        </button>
+          <label className="admin-visibility-toggle">
+            <input
+              type="checkbox"
+              checked={isVisible}
+              onChange={() => onToggleVisibility(dish)}
+            />
+            <span className="admin-visibility-slider" />
+          </label>
+
+          <span className="admin-visibility-label">
+            {isVisible ? "Visible" : "Oculto"}
+          </span>
+
+        </div>
+
+        <div className="admin-menu-actions-buttons">
+
+          <button className="admin-edit-button" onClick={() => onEdit(dish)}>
+            Editar
+          </button>
+
+          <button className="admin-delete-button" onClick={() => onDelete(dish.id)}>
+            Eliminar
+          </button>
+
+        </div>
 
       </div>
 

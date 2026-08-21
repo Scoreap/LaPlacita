@@ -61,6 +61,10 @@ function Admin() {
     await deleteDish(id);
   }
 
+  async function handleToggleVisibility(dish) {
+    await updateDish(dish.id, { visible: dish.visible === false });
+  }
+
   return (
     <div className="admin-page">
 
@@ -96,6 +100,7 @@ function Admin() {
           dishes={dishes}
           onEdit={openEditModal}
           onDelete={handleDelete}
+          onToggleVisibility={handleToggleVisibility}
         />
 
       </main>

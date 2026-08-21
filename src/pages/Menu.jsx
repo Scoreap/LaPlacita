@@ -28,10 +28,12 @@ function Menu() {
     return () => unsubscribe();
   }, []);
 
+  const visibleDishes = dishes.filter((dish) => dish.visible !== false);
+
   const filteredDishes =
     selectedCategory === "Todos"
-      ? dishes
-      : dishes.filter((dish) => dish.category === selectedCategory);
+      ? visibleDishes
+      : visibleDishes.filter((dish) => dish.category === selectedCategory);
   return (
     <div className="page">
 
