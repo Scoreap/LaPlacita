@@ -4,7 +4,7 @@ import { CATEGORIES } from "../../constants/categories";
 
 const CATEGORY_FILTERS = ["Todos", ...CATEGORIES];
 
-function MenuEditor({ dishes, onEdit, onDelete }) {
+function MenuEditor({ dishes, onEdit, onDelete, onToggleVisibility }) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("Todos");
 
@@ -98,6 +98,7 @@ function MenuEditor({ dishes, onEdit, onDelete }) {
               dish={dish}
               onEdit={onEdit}
               onDelete={onDelete}
+              onToggleVisibility={onToggleVisibility}
             />
           ))}
 

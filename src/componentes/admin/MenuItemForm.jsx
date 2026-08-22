@@ -79,8 +79,13 @@ function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
               id="product-image"
               type="file"
               accept="image/*"
+              className="admin-image-upload-input"
               onChange={handleImageChange}
             />
+
+            <label htmlFor="product-image" className="admin-image-upload-button">
+              Elegir imagen
+            </label>
 
           </div>
 

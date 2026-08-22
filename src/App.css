@@ -1307,7 +1307,105 @@ section {
   white-space: nowrap;
 }
 
+.admin-menu-card.is-hidden {
+  opacity: 0.55;
+}
+
+.admin-menu-card.is-hidden:hover {
+  opacity: 1;
+}
+
 .admin-menu-actions {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 0.7rem;
+}
+
+.admin-menu-visibility {
+  display: flex;
+
+  align-items: center;
+
+  gap: 0.5rem;
+}
+
+.admin-visibility-toggle {
+  position: relative;
+
+  display: inline-flex;
+
+  cursor: pointer;
+}
+
+.admin-visibility-toggle input {
+  position: absolute;
+
+  opacity: 0;
+
+  width: 1px;
+
+  height: 1px;
+}
+
+.admin-visibility-slider {
+  width: 2.3rem;
+
+  height: 1.3rem;
+
+  background: var(--color-border);
+
+  border-radius: 999px;
+
+  transition: background 0.2s ease;
+}
+
+.admin-visibility-slider::before {
+  content: "";
+
+  display: block;
+
+  width: 1rem;
+
+  height: 1rem;
+
+  margin: 0.15rem;
+
+  background: white;
+
+  border-radius: 50%;
+
+  transition: transform 0.2s ease;
+}
+
+.admin-visibility-toggle input:checked + .admin-visibility-slider {
+  background: var(--color-primary);
+}
+
+.admin-visibility-toggle input:checked + .admin-visibility-slider::before {
+  transform: translateX(1rem);
+}
+
+.admin-visibility-toggle input:focus-visible + .admin-visibility-slider {
+  outline: 2px solid var(--color-primary);
+
+  outline-offset: 2px;
+}
+
+.admin-visibility-label {
+  font-size: 0.75rem;
+
+  font-weight: 700;
+
+  color: var(--color-text-light);
+
+  white-space: nowrap;
+}
+
+.admin-menu-actions-buttons {
   display: flex;
 
   gap: 0.5rem;
@@ -1436,6 +1534,46 @@ section {
   gap: 1.2rem;
 }
 
+.admin-image-upload-input {
+  position: absolute;
+
+  width: 1px;
+
+  height: 1px;
+
+  opacity: 0;
+
+  overflow: hidden;
+}
+
+.admin-image-upload-button {
+  display: inline-block;
+
+  padding: 0.7rem 1.2rem;
+
+  border: 1px solid var(--color-primary);
+
+  color: var(--color-primary);
+
+  background: transparent;
+
+  font-weight: 700;
+
+  font-size: 0.85rem;
+
+  cursor: pointer;
+
+  border-radius: 2px;
+
+  white-space: nowrap;
+}
+
+.admin-image-upload-button:hover {
+  background: var(--color-primary);
+
+  color: white;
+}
+
 .admin-image-preview {
   width: 100px;
 
@@ -1521,4 +1659,142 @@ section {
   line-height: 1;
 
   cursor: pointer;
+}
+
+
+/* =====================================================
+   ADMIN RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+  .admin-login-page {
+    padding: 1.25rem;
+  }
+
+  .admin-login-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .admin-login-card h1 {
+    font-size: 2.2rem;
+  }
+
+  .admin-header-container {
+    padding: 1rem 1.25rem;
+
+    flex-wrap: wrap;
+
+    gap: 0.75rem;
+  }
+
+  .admin-content {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .admin-heading {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 1.25rem;
+
+    margin-bottom: 2.5rem;
+  }
+
+  .admin-heading h1 {
+    font-size: 2.6rem;
+  }
+
+  .admin-add-button {
+    width: 100%;
+  }
+
+  .menu-editor-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 0.5rem;
+  }
+
+  .menu-editor-filters {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .menu-editor-search-field {
+    max-width: none;
+  }
+
+  .admin-menu-card {
+    grid-template-columns: 1fr;
+
+    padding: 1.25rem;
+  }
+
+  .admin-menu-image {
+    width: 100%;
+
+    aspect-ratio: 16 / 9;
+  }
+
+  .admin-menu-info {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 0.75rem;
+  }
+
+  .admin-menu-actions {
+    width: 100%;
+
+    align-items: stretch;
+  }
+
+  .admin-menu-visibility {
+    justify-content: space-between;
+  }
+
+  .admin-menu-actions-buttons button {
+    flex: 1;
+  }
+
+  .admin-modal-overlay {
+    padding: 1.25rem 0.75rem;
+  }
+
+  .admin-modal-close {
+    top: -2.2rem;
+
+    right: 0.25rem;
+  }
+
+  .menu-item-form {
+    padding: 1.5rem 1.25rem;
+  }
+
+  .menu-item-form-header h2 {
+    font-size: 1.9rem;
+  }
+
+  .admin-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .admin-form-actions button {
+    width: 100%;
+  }
+
+  .admin-image-upload {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
 }
