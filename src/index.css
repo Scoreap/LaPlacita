@@ -591,3 +591,554 @@
 .contact-button:hover {
   background: var(--color-primary-dark);
 }
+
+/* CSS PARA HOME NECESARIOS*/
+/* =====================================================
+   HOME - ESTILOS NUEVOS
+===================================================== */
+
+/* Evita desplazamiento horizontal */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.home-page {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+
+/* =====================================================
+   NAVBAR STICKY
+===================================================== */
+
+.home-sticky-navbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+
+/* =====================================================
+   HERO NUEVO
+===================================================== */
+
+.home-hero {
+  position: relative;
+  width: 100%;
+  min-height: 80vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  text-align: center;
+
+  background: #4d3a30;
+  color: white;
+}
+
+.home-hero-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.home-hero-overlay {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(30, 20, 15, 0.55);
+}
+
+.home-hero-content {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 800px;
+
+  padding: 4rem 2rem;
+}
+
+.home-hero-content h1 {
+  margin: 1rem 0 1.5rem;
+
+  font-size: clamp(3rem, 8vw, 6rem);
+  line-height: 1;
+}
+
+.home-hero-content p {
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+
+/* =====================================================
+   BOTONES DE HOME
+===================================================== */
+
+.home-actions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  gap: 1rem;
+}
+
+.home-main-button,
+.home-secondary-button {
+  display: inline-block;
+
+  padding: 0.9rem 1.5rem;
+
+  border-radius: 4px;
+
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.home-main-button {
+  background: var(--color-secondary);
+  color: white;
+}
+
+.home-secondary-button {
+  border: 2px solid white;
+  color: white;
+}
+
+
+/* =====================================================
+   ENCABEZADOS DE SECCIONES
+===================================================== */
+
+.home-section-heading {
+  width: 100%;
+  max-width: 800px;
+
+  margin: 0 auto 3rem;
+
+  text-align: center;
+}
+
+.home-section-heading h2 {
+  margin: 0.5rem 0;
+
+  font-size: 2.5rem;
+}
+
+
+/* =====================================================
+   PLATILLOS DESTACADOS
+===================================================== */
+
+.home-featured {
+  width: 100%;
+
+  padding: 5rem 2rem;
+
+  background: var(--color-surface);
+}
+
+.home-dishes-grid {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 1.8rem;
+}
+
+.home-dish-card {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1 / 1;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #d8c6b4;
+}
+
+.home-dish-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+}
+
+
+.home-dish-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transition: transform 0.4s ease;
+}
+
+.home-dish-info {
+  position: absolute;
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  padding: 1.4rem;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.82) 0%,
+      rgba(0, 0, 0, 0.30) 35%,
+      transparent 65%
+    );
+
+  transition: background 0.35s ease;
+}
+
+.home-dish-name {
+  margin: 0;
+
+  color: white;
+
+  font-size: 1.35rem;
+  line-height: 1.2;
+}
+
+.home-dish-details {
+  max-height: 0;
+
+  opacity: 0;
+
+  overflow: hidden;
+
+  transform: translateY(10px);
+
+  transition:
+    max-height 0.35s ease,
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+.home-dish-card:hover .home-dish-details {
+  max-height: 220px;
+
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+.home-dish-card:hover .home-dish-info {
+  background:
+    linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.92) 0%,
+      rgba(0, 0, 0, 0.60) 55%,
+      rgba(0, 0, 0, 0.15) 100%
+    );
+}
+
+.home-dish-card:hover .home-dish-image img {
+  transform: scale(1.06);
+}
+
+.home-dish-category {
+  display: block;
+
+  margin-top: 0.8rem;
+
+  font-size: 0.72rem;
+  font-weight: bold;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+.home-dish-details p {
+  margin: 0.55rem 0;
+
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
+
+.home-featured-button {
+  margin-top: 3rem;
+
+  text-align: center;
+}
+
+
+/* =====================================================
+   RESEÑAS
+===================================================== */
+
+.reviews-section {
+  width: 100%;
+
+  padding: 6rem 2rem;
+
+  background: var(--color-background);
+
+  text-align: center;
+}
+
+.review-carousel {
+  width: 100%;
+  max-width: 850px;
+
+  margin: 3rem auto 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 1.5rem;
+}
+
+.review-card {
+  flex: 1;
+
+  min-width: 0;
+  min-height: 260px;
+
+  padding: 3rem;
+
+  border: 1px solid var(--color-border);
+
+  background: white;
+}
+
+.review-stars {
+  margin-bottom: 1rem;
+
+  color: var(--color-secondary);
+
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+}
+
+.review-card blockquote {
+  margin: 0;
+
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+.review-card strong {
+  display: block;
+
+  margin-top: 1.5rem;
+
+  color: var(--color-primary);
+}
+
+.review-counter {
+  margin-top: 1rem;
+
+  color: #777;
+
+  font-size: 0.8rem;
+}
+
+.review-button {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  border: none;
+  border-radius: 50%;
+
+  background: var(--color-primary);
+
+  color: white;
+
+  font-size: 1.5rem;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease;
+}
+
+.review-button:hover {
+  transform: scale(1.08);
+
+  background: var(--color-primary-dark);
+}
+
+.review-dots {
+  display: flex;
+  justify-content: center;
+
+  gap: 0.5rem;
+
+  margin-top: 1.5rem;
+}
+
+.review-dot {
+  border: none;
+
+  background: transparent;
+
+  color: var(--color-primary);
+
+  font-size: 1.3rem;
+
+  cursor: pointer;
+}
+
+
+/* =====================================================
+   ¿POR QUÉ LA PLACITA?
+===================================================== */
+
+.home-why-section {
+  width: 100%;
+
+  padding: 6rem 2rem;
+
+  background: var(--color-surface);
+}
+
+.home-why-grid {
+  width: 100%;
+  max-width: 1000px;
+
+  margin: 0 auto;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 2rem;
+}
+
+.home-why-card {
+  padding: 2rem;
+
+  border: 1px solid var(--color-border);
+
+  background: white;
+
+  text-align: center;
+}
+
+.home-why-card h3 {
+  margin-bottom: 1rem;
+
+  color: var(--color-primary);
+
+  font-size: 1.4rem;
+}
+
+.home-why-card p {
+  color: var(--color-text-light);
+
+  line-height: 1.6;
+}
+
+
+/* =====================================================
+   CONTACTO FINAL
+===================================================== */
+
+.home-contact-section {
+  width: 100%;
+
+  padding: 6rem 2rem;
+
+  background: var(--color-primary);
+
+  color: white;
+
+  text-align: center;
+}
+
+.home-contact-section h2 {
+  margin: 1rem 0;
+
+  font-size: 2.8rem;
+}
+
+.home-contact-section p {
+  margin-bottom: 2rem;
+}
+
+
+/* =====================================================
+   RESPONSIVE HOME
+===================================================== */
+
+@media (max-width: 900px) {
+
+  .home-dishes-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .home-why-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .home-dishes-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .review-carousel {
+    gap: 0.5rem;
+  }
+
+  .review-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .review-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .home-featured,
+  .reviews-section,
+  .home-why-section,
+  .home-contact-section {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+}
