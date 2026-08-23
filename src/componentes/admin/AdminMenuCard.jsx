@@ -6,32 +6,43 @@ function AdminMenuCard({ dish, onEdit, onDelete, onToggleVisibility }) {
 
       <div className="admin-menu-image">
         {dish.image ? (
-          <img
-            src={dish.image}
-            alt={dish.name}
-            loading="lazy"
-            decoding="async"
-          />
+          <img src={dish.image} alt={dish.name} loading="lazy" decoding="async" />
         ) : (
-          <span>Sin imagen</span>
+          "Imagen"
         )}
       </div>
 
+
       <div className="admin-menu-info">
+
         <div className="admin-menu-main">
+
           <span className="admin-menu-category">
             {dish.category.toUpperCase()}
           </span>
-          <h3>{dish.name}</h3>
-          <p>{dish.description}</p>
+
+          <h3>
+            {dish.name}
+          </h3>
+
+          <p>
+            {dish.description}
+          </p>
+
         </div>
+
 
         <div className="admin-menu-price">
           Q {Number(dish.price).toFixed(2)}
         </div>
+
       </div>
 
+
       <div className="admin-menu-actions">
+
+        <div className="admin-menu-visibility">
+
           <label className="admin-visibility-toggle">
             <input
               type="checkbox"
@@ -48,20 +59,19 @@ function AdminMenuCard({ dish, onEdit, onDelete, onToggleVisibility }) {
         </div>
 
         <div className="admin-menu-actions-buttons">
-          <button
-          type="button"
-          className="admin-edit-button"
-          onClick={() => onEdit(dish)}
-          aria-label={`Editar ${dish.name}`}
-        >
+
+          <button className="admin-edit-button" onClick={() => onEdit(dish)}>
             Editar
           </button>
 
-        <button className="admin-delete-button" onClick={() => onDelete(dish.id)}>
-          Eliminar
-        </button>
+          <button className="admin-delete-button" onClick={() => onDelete(dish.id)}>
+            Eliminar
+          </button>
+
+        </div>
 
       </div>
+
     </article>
   );
 }

@@ -1684,33 +1684,6 @@
     display: inline;
   }
 
-  .menu-editor-filters {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.48fr);
-    align-items: center;
-  }
-
-  .menu-editor-search-field {
-    order: 0;
-    grid-column: 2;
-    grid-row: 1;
-  }
-
-  .menu-editor-category-buttons {
-    grid-column: 1;
-    grid-row: 1;
-    margin-inline: 0;
-    padding-inline: 0;
-  }
-
-  .admin-menu-card {
-    grid-template-columns: 6.5rem minmax(0, 1fr);
-  }
-
-  .admin-menu-image {
-    width: 6.5rem;
-  }
-
   .admin-form-row {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1846,84 +1819,6 @@
 
   .admin-heading h1 {
     font-size: 2.5rem;
-  }
-
-  .menu-editor-header {
-    margin-top: var(--space-3);
-  }
-
-  .admin-list-headings {
-    margin-top: var(--space-5);
-    padding: 0 var(--space-4) var(--space-3) 6.75rem;
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(8rem, 0.55fr) 7rem 12.5rem;
-    gap: var(--space-5);
-    color: var(--color-text-muted);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-  }
-
-  .admin-menu-list {
-    margin-top: 0;
-    gap: 0;
-    overflow: hidden;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    background: var(--color-surface);
-  }
-
-  .admin-menu-card {
-    padding: var(--space-3) var(--space-4);
-    grid-template-columns: 4rem minmax(0, 1fr) 12.5rem;
-    align-items: center;
-    gap: var(--space-5);
-    border: 0;
-    border-bottom: 1px solid var(--color-border);
-    border-radius: 0;
-  }
-
-  .admin-menu-card:last-child {
-    border-bottom: 0;
-  }
-
-  .admin-menu-image {
-    width: 4rem;
-  }
-
-  .admin-menu-info {
-    display: grid;
-    grid-template-columns: minmax(0, 1.2fr) minmax(8rem, 0.55fr) 7rem;
-    align-items: center;
-    gap: var(--space-5);
-  }
-
-  .admin-menu-main {
-    display: contents;
-  }
-
-  .admin-menu-main h3 {
-    order: initial;
-    grid-column: 1;
-    font-size: 1.05rem;
-  }
-
-  .admin-menu-category {
-    order: initial;
-    grid-column: 2;
-    margin-top: 0;
-  }
-
-  .admin-menu-price {
-    grid-column: 3;
-    margin-top: 0;
-  }
-
-  .admin-menu-actions {
-    grid-column: 3;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-2);
   }
 }
 
