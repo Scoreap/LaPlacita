@@ -271,6 +271,9 @@ body,
   color: white;
 }
 
+#welcome-title {
+  color: white;
+}
 .home-hero-image {
   position: absolute;
   inset: 0;
@@ -323,8 +326,20 @@ body,
   gap: 1rem;
 }
 
-.home-main-button,
+
+.home-main-button {
+  display: inline-block;
+  background: #d3a454;
+  border: 3px solid #d3a454;
+  padding: 0.9rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: bold;
+  color: white;
+}
+
 .home-secondary-button {
+  background: transparent;
   display: inline-block;
 
   padding: 0.9rem 1.5rem;
@@ -335,9 +350,17 @@ body,
   font-weight: bold;
 }
 
-.home-main-button {
-  background: var(--color-secondary);
+.hero-button {
+  display: inline-block;
+
+  padding: 0.9rem 1.8rem;
+
+  background: #d89b3d;
   color: white;
+
+  font-weight: bold;
+
+  border-radius: 4px;
 }
 
 .home-secondary-button {
@@ -561,7 +584,7 @@ body,
 .review-stars {
   margin-bottom: 1rem;
 
-  color: var(--color-secondary);
+  color: #d3a454;
 
   font-size: 1.5rem;
   letter-spacing: 3px;
