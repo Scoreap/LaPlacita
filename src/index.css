@@ -1,13 +1,14 @@
 /* =====================================================
    Estilo
 ===================================================== */
+
+@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap");
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Source+Sans+3:wght@400;600;700&display=swap");
 
 :root {
   color-scheme: light;
@@ -206,6 +207,7 @@ select:focus-visible {
 }
 
 
+
 /* CSS PARA HOME NECESARIOS*/
 /* =====================================================
    HOME - ESTILOS NUEVOS
@@ -262,6 +264,10 @@ body,
   text-align: center;
 
   background: #4d3a30;
+  color: white;
+}
+
+#home-title {
   color: white;
 }
 

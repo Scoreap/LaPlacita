@@ -32,9 +32,6 @@ function AdminMenuCard({ dish, onEdit, onDelete, onToggleVisibility }) {
       </div>
 
       <div className="admin-menu-actions">
-
-        <div className="admin-menu-visibility">
-
           <label className="admin-visibility-toggle">
             <input
               type="checkbox"
