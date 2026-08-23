@@ -50,7 +50,7 @@ function Admin() {
       }
 
       closeModal();
-    } catch (err) {
+    } catch {
       setError("No se pudo guardar el platillo. Intenta de nuevo.");
     } finally {
       setIsSaving(false);
@@ -67,34 +67,24 @@ function Admin() {
 
   return (
     <div className="admin-page">
-
       <AdminHeader />
 
-      <main className="admin-content">
-
-        <section className="admin-heading">
-
+      <main id="main-content" className="admin-content">
+        <section className="admin-heading" aria-labelledby="admin-title">
           <div>
-            <span>
-              ADMINISTRACIÓN
-            </span>
-
-            <h1>
-              Menú
-            </h1>
-
-            <p>
-              Administra los platillos y precios
-              del restaurante.
-            </p>
+            <span>ADMINISTRACIÓN</span>
+            <h1 id="admin-title">Platos del menú</h1>
+            <p>Administra los platillos y precios del restaurante.</p>
           </div>
 
-          <button className="admin-add-button" onClick={openAddModal}>
+          <button
+            type="button"
+            className="admin-add-button"
+            onClick={openAddModal}
+          >
             + Agregar platillo
           </button>
-
         </section>
-
 
         <MenuEditor
           dishes={dishes}
@@ -102,13 +92,12 @@ function Admin() {
           onDelete={handleDelete}
           onToggleVisibility={handleToggleVisibility}
         />
-
       </main>
 
       {isModalOpen && (
         <Modal onClose={closeModal}>
           {error && (
-            <p className="admin-login-error">
+            <p className="admin-login-error" role="alert">
               {error}
             </p>
           )}
@@ -121,7 +110,6 @@ function Admin() {
           />
         </Modal>
       )}
-
     </div>
   );
 }

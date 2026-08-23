@@ -5,50 +5,27 @@ import ContactForm from "../componentes/ContactForm";
 function Contact() {
   return (
     <div className="page">
-
       <Navbar />
 
-      <main>
-
-        {/* HEADER */}
-
+      <main id="main-content">
         <header className="contact-header">
-
           <span>LA PLACITA</span>
-
           <h1>Contáctanos</h1>
-
-          <p>
-            Estamos para ayudarte.
-          </p>
-
+          <p>Estamos para ayudarte.</p>
         </header>
 
-
-        {/* CONTENIDO */}
-
-        <section className="contact-content">
-
-          {/* INFORMACIÓN */}
-
+        <section className="contact-content" aria-labelledby="contact-title">
           <div className="contact-info">
+            <span className="section-label">HABLEMOS</span>
 
-            <span className="section-label">
-              HABLEMOS
-            </span>
-
-            <h2>
-              ¿Tienes alguna pregunta?
-            </h2>
+            <h2 id="contact-title">¿Tienes alguna pregunta?</h2>
 
             <p>
-              Escríbenos para reservar, hacer una pregunta
-              o simplemente decirnos qué necesitas.
+              Escríbenos para reservar, hacer una pregunta o simplemente
+              decirnos qué necesitas.
             </p>
 
-
             <div className="contact-details">
-
               <div>
                 <span>Teléfono</span>
                 <p>5714-1023</p>
@@ -63,22 +40,14 @@ function Contact() {
                 <span>Ubicación</span>
                 <p>La Placita</p>
               </div>
-
             </div>
-
           </div>
 
-
-          {/* FORMULARIO */}
-
           <ContactForm />
-
         </section>
-
       </main>
 
       <Footer />
-
     </div>
   );
 }

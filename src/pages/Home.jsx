@@ -245,7 +245,6 @@ function Home() {
       ================================================= */}
 
       <div className="home-sticky-navbar">
-
         <Navbar />
 
       </div>
@@ -280,8 +279,9 @@ function Home() {
             </span>
 
 
-            <h1>
+            <h1 id="home-title">
               Comedor
+              
               <br />
               La Placita
             </h1>
@@ -771,8 +771,9 @@ function Home() {
           </span>
 
 
-          <h2>
-            ¿Listo para visitarnos?
+          <h2 id="welcome-title">
+            ¿Listo para
+             visitarnos?
           </h2>
 
 
@@ -807,7 +808,6 @@ function Home() {
 
         </section>
 
-
       </main>
 
 
@@ -817,7 +817,6 @@ function Home() {
       ================================================= */}
 
       <Footer />
-
 
     </div>
 

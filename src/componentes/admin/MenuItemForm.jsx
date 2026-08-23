@@ -11,12 +11,19 @@ const emptyDish = {
 
 function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
   const isEditing = Boolean(initialValues);
-
   const [name, setName] = useState(initialValues?.name ?? emptyDish.name);
-  const [description, setDescription] = useState(initialValues?.description ?? emptyDish.description);
-  const [price, setPrice] = useState(initialValues?.price ?? emptyDish.price);
-  const [category, setCategory] = useState(initialValues?.category ?? emptyDish.category);
-  const [image, setImage] = useState(initialValues?.image ?? emptyDish.image);
+  const [description, setDescription] = useState(
+    initialValues?.description ?? emptyDish.description,
+  );
+  const [price, setPrice] = useState(
+    initialValues?.price ?? emptyDish.price,
+  );
+  const [category, setCategory] = useState(
+    initialValues?.category ?? emptyDish.category,
+  );
+  const [image, setImage] = useState(
+    initialValues?.image ?? emptyDish.image,
+  );
 
   function handleImageChange(event) {
     const file = event.target.files?.[0];
@@ -45,33 +52,27 @@ function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
 
   return (
     <div className="menu-item-form">
-
       <div className="menu-item-form-header">
-        <span>
-          PLATILLO
-        </span>
-
-        <h2>
+        <span>PLATILLO</span>
+        <h2 id="dish-form-title">
           {isEditing ? "Editar platillo" : "Agregar platillo"}
         </h2>
       </div>
 
-
       <form onSubmit={handleSubmit}>
-
         <div className="admin-form-group">
-
-          <label htmlFor="product-image">
-            Imagen
-          </label>
+          <label htmlFor="product-image">Imagen</label>
 
           <div className="admin-image-upload">
-
             <div className="admin-image-preview">
               {image ? (
-                <img src={image} alt="Vista previa del platillo" />
+                <img
+                  src={image}
+                  alt="Vista previa del platillo"
+                  decoding="async"
+                />
               ) : (
-                "Sin imagen"
+                <span>Sin imagen</span>
               )}
             </div>
 
@@ -88,16 +89,10 @@ function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
             </label>
 
           </div>
-
         </div>
 
-
         <div className="admin-form-group">
-
-          <label htmlFor="product-name">
-            Nombre
-          </label>
-
+          <label htmlFor="product-name">Nombre</label>
           <input
             id="product-name"
             type="text"
@@ -106,16 +101,10 @@ function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
             onChange={(event) => setName(event.target.value)}
             required
           />
-
         </div>
 
-
         <div className="admin-form-group">
-
-          <label htmlFor="product-description">
-            Descripción
-          </label>
-
+          <label htmlFor="product-description">Descripción</label>
           <textarea
             id="product-description"
             placeholder="Descripción del platillo"
@@ -124,71 +113,59 @@ function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
             onChange={(event) => setDescription(event.target.value)}
             required
           />
-
         </div>
 
-
         <div className="admin-form-row">
-
           <div className="admin-form-group">
-
-            <label htmlFor="product-price">
-              Precio
-            </label>
-
+            <label htmlFor="product-price">Precio</label>
             <input
               id="product-price"
               type="number"
               min="0"
               step="0.01"
+              inputMode="decimal"
               placeholder="0.00"
               value={price}
               onChange={(event) => setPrice(event.target.value)}
               required
             />
-
           </div>
 
-
           <div className="admin-form-group">
-
-            <label htmlFor="product-category">
-              Categoría
-            </label>
-
+            <label htmlFor="product-category">Categoría</label>
             <select
               id="product-category"
               value={category}
               onChange={(event) => setCategory(event.target.value)}
             >
-
               {CATEGORIES.map((option) => (
                 <option key={option} value={option}>
                   {option}
                 </option>
               ))}
-
             </select>
-
           </div>
-
         </div>
 
-
         <div className="admin-form-actions">
-
-          <button type="button" className="admin-cancel-button" onClick={onCancel} disabled={isSaving}>
+          <button
+            type="button"
+            className="admin-cancel-button"
+            onClick={onCancel}
+            disabled={isSaving}
+          >
             Cancelar
           </button>
 
-          <button type="submit" className="admin-primary-button" disabled={isSaving}>
+          <button
+            type="submit"
+            className="admin-primary-button"
+            disabled={isSaving}
+          >
             {isSaving ? "Guardando..." : "Guardar"}
           </button>
-
         </div>
-
       </form>
-
     </div>
   );
 }
