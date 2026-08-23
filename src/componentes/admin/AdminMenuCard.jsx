@@ -1,9 +1,15 @@
-function AdminMenuCard() {
+function AdminMenuCard({ dish, onEdit, onDelete, onToggleVisibility }) {
+  const isVisible = dish.visible !== false;
+
   return (
-    <article className="admin-menu-card">
+    <article className={"admin-menu-card" + (isVisible ? "" : " is-hidden")}>
 
       <div className="admin-menu-image">
-        Imagen
+        {dish.image ? (
+          <img src={dish.image} alt={dish.name} loading="lazy" decoding="async" />
+        ) : (
+          "Imagen"
+        )}
       </div>
 
 
@@ -12,22 +18,22 @@ function AdminMenuCard() {
         <div className="admin-menu-main">
 
           <span className="admin-menu-category">
-            DESAYUNOS
+            {dish.category.toUpperCase()}
           </span>
 
           <h3>
-            Platillo de ejemplo
+            {dish.name}
           </h3>
 
           <p>
-            Descripción del platillo.
+            {dish.description}
           </p>
 
         </div>
 
 
         <div className="admin-menu-price">
-          Q 00.00
+          Q {Number(dish.price).toFixed(2)}
         </div>
 
       </div>
@@ -35,13 +41,34 @@ function AdminMenuCard() {
 
       <div className="admin-menu-actions">
 
-        <button className="admin-edit-button">
-          Editar
-        </button>
+        <div className="admin-menu-visibility">
 
-        <button className="admin-delete-button">
-          Eliminar
-        </button>
+          <label className="admin-visibility-toggle">
+            <input
+              type="checkbox"
+              checked={isVisible}
+              onChange={() => onToggleVisibility(dish)}
+            />
+            <span className="admin-visibility-slider" />
+          </label>
+
+          <span className="admin-visibility-label">
+            {isVisible ? "Visible" : "Oculto"}
+          </span>
+
+        </div>
+
+        <div className="admin-menu-actions-buttons">
+
+          <button className="admin-edit-button" onClick={() => onEdit(dish)}>
+            Editar
+          </button>
+
+          <button className="admin-delete-button" onClick={() => onDelete(dish.id)}>
+            Eliminar
+          </button>
+
+        </div>
 
       </div>
 
