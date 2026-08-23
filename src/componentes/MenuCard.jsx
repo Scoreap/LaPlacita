@@ -6,7 +6,23 @@ function MenuCard({ dish }) {
 
       <div className="menu-card-image">
         {image ? (
-          <img src={image} alt={name} loading="lazy" />
+          <>
+            <img
+              className="menu-card-image-backdrop"
+              src={image}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              decoding="async"
+            />
+            <img
+              className="menu-card-image-photo"
+              src={image}
+              alt={name}
+              loading="lazy"
+              decoding="async"
+            />
+          </>
         ) : (
           <span>Foto del platillo</span>
         )}

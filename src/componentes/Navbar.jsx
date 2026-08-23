@@ -1,36 +1,21 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
   return (
     <header className="navbar">
-
       <div className="navbar-container">
-
-        <Link to="/" className="navbar-logo">
+        <Link to="/" className="navbar-logo" aria-label="La Placita, inicio">
           La Placita
         </Link>
 
-        <nav
-          className="navbar-links"
-          aria-label="Navegación principal"
-        >
-
-          <Link to="/">
+        <nav className="navbar-links" aria-label="Navegación principal">
+          <NavLink to="/" end>
             Inicio
-          </Link>
-
-          <Link to="/menu">
-            Menú
-          </Link>
-
-          <Link to="/contacto">
-            Contacto
-          </Link>
-
+          </NavLink>
+          <NavLink to="/menu">Menú</NavLink>
+          <NavLink to="/contacto">Contacto</NavLink>
         </nav>
-
       </div>
-
     </header>
   );
 }
