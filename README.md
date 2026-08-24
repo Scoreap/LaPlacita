@@ -92,20 +92,7 @@ flowchart LR
 	- **Productos:** ver detalles y opciones (si se implementan).
 	- **Contacto:** enviar mensaje al negocio.
 
-7) **Arquitectura del programa (diagrama de componentes y flujo de datos)**
-```mermaid
-graph LR
-	Browser --> main[main.jsx]
-	main --> App[App.jsx (Router)]
-	App --> Pages[Pages (Menu, Home, Admin, Contact)]
-	Pages --> Components[Components (Navbar, MenuGrid, MenuCard,...)]
-	Pages --> Services[services/dishesService.js]
-	Services --> Firestore[Firestore (collection: dishes)]
-	Components --> CSS[CSS files (App.css, index.css)]
-	Data[data/menu.json] -- respaldo --> Pages
-```
-
-8) **Administración del menú (cómo funciona hoy)**
+7) **Administración del menú (cómo funciona hoy)**
 - **Inicio de sesión admin:** `src/pages/AdminLogin.jsx` utiliza credenciales estáticas (`admin@laplacita.com` / `admin123`) y guarda `admin-auth` en `sessionStorage`.
 - **Operaciones CRUD (implementadas):**
 	- **Crear:** `createDish()` en `src/services/dishesService.js` usa `addDoc`.
@@ -115,17 +102,9 @@ graph LR
 - **Administrar imágenes:** actualmente el repositorio incluye `scripts/seed-images.mjs` que inserta `image` como data URI en documentos — esto funciona pero no es recomendado en producción (mejor usar Storage + URLs).
 - **Validación:** la UI tiene validación básica; validaciones avanzadas y autenticación real son funcionalidad pendiente/recomendada.
 
-9) **Descripción técnica (resumen para presentación)**
+8) **Descripción técnica**
 - Aplicación SPA con React y `react-router-dom` que usa Firestore como fuente de datos en tiempo real.
 - `Menu.jsx` se subscribe a `dishes` con `onSnapshot` y muestra los cambios automáticamente.
 - El panel admin ejecuta operaciones CRUD mediante funciones en `src/services/dishesService.js`.
 - Scripts de utilidad (`scripts/seed-dishes.mjs`, `scripts/seed-images.mjs`) permiten popular la base de datos para pruebas.
 
-**Funcionalidades pendientes / propuestas**
-- Migrar imágenes a Firebase Storage y guardar URLs en Firestore (mejor rendimiento y coste).
-- Reemplazar credenciales estáticas por autenticación real (Firebase Auth) para seguridad.
-- Añadir validaciones de servidor o reglas de seguridad Firestore más estrictas.
-
----
-
-Última actualización: documentación y presentación añadidas.
