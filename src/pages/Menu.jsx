@@ -1,10 +1,4 @@
-import {
-  useCallback,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState,} from "react";
 import Navbar from "../componentes/Navbar";
 import Footer from "../componentes/Footer";
 import CategoryButton from "../componentes/CategoryButton";
