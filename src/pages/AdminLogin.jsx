@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const ADMIN_EMAIL = "admin@laplacita.com";
 const ADMIN_PASSWORD = "admin123";
@@ -16,11 +17,27 @@ function AdminLogin() {
 
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       sessionStorage.setItem("admin-auth", "true");
+      toast.success("Inicio de sesión exitoso.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       navigate("/admin");
       return;
     }
-
-    setError("Correo o contraseña incorrectos.");
+    toast.error("Correo o contraseña incorrectos.", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+    });
   }
 
   return (
