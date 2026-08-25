@@ -62,7 +62,15 @@ function ContactForm() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length > 0) {
-      toast.error("Por favor, revisa los campos del formulario.");
+      toast.error("Por favor, corrige los errores en el formulario.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       document.getElementById(Object.keys(newErrors)[0])?.focus();
       return;
     }
@@ -77,7 +85,16 @@ function ContactForm() {
         "zK_KIeoj0PUP93o27",
       );
 
-      toast.success("¡Mensaje enviado correctamente!");
+      toast.success("Mensaje enviado con éxito. ¡Gracias por contactarnos!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      
       setFormData({
         nombre: "",
         email: "",
@@ -86,7 +103,17 @@ function ContactForm() {
       });
       setErrors({});
     } catch {
-      toast.error("No se pudo enviar el mensaje. Inténtalo nuevamente.");
+      toast.error("Hubo un error al enviar el mensaje. Por favor, inténtalo de nuevo más tarde.",
+        {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        },
+      );
     } finally {
       setIsSending(false);
     }

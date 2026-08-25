@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 
 import Navbar from "../componentes/Navbar";
 import Footer from "../componentes/Footer";
+import Loading from "../componentes/Loading";
+import ErrorMessage from "../componentes/ErrorMessage";
 
 import { subscribeToDishes } from "../services/dishesService";
 
@@ -126,6 +128,13 @@ function Home() {
 
 
   /*
+    error guarda el mensaje de error si Firebase
+    no responde o hay un problema de conexión.
+  */
+  const [error, setError] = useState(null);
+
+
+  /*
     reviewIndex guarda la posición de la reseña
     que se está mostrando actualmente.
   */
@@ -147,13 +156,21 @@ function Home() {
       Cuando recibe los platillos, los guardamos
       utilizando setDishes().
     */
-    const unsubscribe = subscribeToDishes((data) => {
+    const unsubscribe = subscribeToDishes(
+      (data) => {
 
-      setDishes(data);
+        setDishes(data);
 
-      setLoading(false);
+        setLoading(false);
 
-    });
+      },
+      () => {
+
+        setError("No pudimos cargar los platillos. Intenta de nuevo.");
+        setLoading(false);
+
+      },
+    );
 
 
     /*
@@ -355,9 +372,20 @@ function Home() {
 
           {loading && (
 
-            <p style={{ textAlign: "center" }}>
-              Cargando platillos...
-            </p>
+            <Loading />
+
+          )}
+
+
+
+          {/* Si ocurrió un error al cargar */}
+
+          {!loading && error && (
+
+            <ErrorMessage
+              message={error}
+              onRetry={() => window.location.reload()}
+          />
 
           )}
 
@@ -365,7 +393,7 @@ function Home() {
 
           {/* Cuando ya tenemos los datos */}
 
-          {!loading && (
+          {!loading && !error && (
 
             <div className="home-dishes-grid">
 
