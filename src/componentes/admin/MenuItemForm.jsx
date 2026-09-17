@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CATEGORIES } from "../../constants/categories";
 
 const emptyDish = {
@@ -24,6 +24,17 @@ function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
   const [image, setImage] = useState(
     initialValues?.image ?? emptyDish.image,
   );
+  const [previewUrl, setPreviewUrl] = useState(
+    initialValues?.image ?? null,
+  );
+
+  useEffect(() => {
+    return () => {
+      if (previewUrl?.startsWith("blob:")) {
+        URL.revokeObjectURL(previewUrl);
+      }
+    };
+  }, [previewUrl]);
 
   function handleImageChange(event) {
     const file = event.target.files?.[0];
@@ -32,9 +43,8 @@ function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = () => setImage(reader.result);
-    reader.readAsDataURL(file);
+    setImage(file);
+    setPreviewUrl(URL.createObjectURL(file));
   }
 
   function handleSubmit(event) {
@@ -65,9 +75,9 @@ function MenuItemForm({ initialValues, onSubmit, onCancel, isSaving }) {
 
           <div className="admin-image-upload">
             <div className="admin-image-preview">
-              {image ? (
+              {previewUrl ? (
                 <img
-                  src={image}
+                  src={previewUrl}
                   alt="Vista previa del platillo"
                   decoding="async"
                 />
