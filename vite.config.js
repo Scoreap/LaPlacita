@@ -5,5 +5,9 @@ export default defineConfig({
     host: true,
     port: 5173,
     allowedHosts: ['laplacitarestaurante.com'],
+    proxy: {
+      // Las consultas de datos pasan por la API Node/Express (Prisma).
+      '/api': 'http://localhost:3001',
+    },
   },
 })

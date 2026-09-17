@@ -1,56 +1,90 @@
 import { supabase } from "../supabaseClient";
 
 const DISHES_TABLE = "dishes";
-const CATEGORIES_TABLE = "categories";
 const DISH_IMAGES_BUCKET = "dish-images";
 
-// "category" viene normalizado en su propia tabla (relacion 1-a-muchos:
-// una categoria tiene muchos platillos). Aqui se hace el join y se
-// aplana el resultado para que el resto de la app siga viendo
-// dish.category como un string, igual que en Firestore.
-function flattenDish({ categories, ...dish }) {
-  return { ...dish, category: categories?.name ?? null };
+// Todas las consultas de datos se resuelven a traves de la API
+// (server -> Prisma -> PostgreSQL de Supabase). En desarrollo Vite
+// redirige /api a la API local (vite.config.js -> proxy).
+const API_BASE = "/api";
+
+async function fetchJson(url, options) {
+  const response = await fetch(url, options);
+
+  let body = null;
+
+  try {
+    body = await response.json();
+  } catch {
+    // Respuesta sin JSON (p.ej. index.html servido fuera del proxy /api).
+  }
+
+  if (!response.ok) {
+    const message = body?.error ?? `Error ${response.status}`;
+    throw new Error(message);
+  }
+
+  if (body === null) {
+    throw new Error("La API no respondió correctamente.");
+  }
+
+  return body;
 }
 
+// Lee los platillos desde la API. Supabase sigue como infraestructura:
+// el canal de realtime de "dishes" solo avisa que algo cambio y aqui se
+// vuelve a consultar; los datos siempre provienen de Prisma.
 export function subscribeToDishes(onChange, onError) {
   let isActive = true;
 
   async function loadDishes() {
-    const { data, error } = await supabase
-      .from(DISHES_TABLE)
-      .select("*, categories(name)")
-      .order("created_at", { ascending: true });
+    try {
+      const data = await fetchJson(`${API_BASE}/dishes`);
 
-    if (!isActive) {
-      return;
+      if (!Array.isArray(data)) {
+        throw new Error("La API respondió con un formato inesperado.");
+      }
+
+      if (isActive) {
+        onChange(data);
+      }
+    } catch (error) {
+      if (isActive) {
+        onError?.(error);
+      }
     }
-
-    if (error) {
-      onError?.(error);
-      return;
-    }
-
-    onChange(data.map(flattenDish));
   }
 
   loadDishes();
 
-  const channel = supabase
-    .channel("dishes-changes")
-    .on(
-      "postgres_changes",
-      { event: "*", schema: "public", table: DISHES_TABLE },
-      loadDishes,
-    )
-    .subscribe();
+  let channel = null;
+
+  if (supabase) {
+    channel = supabase
+      .channel("dishes-changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: DISHES_TABLE },
+        loadDishes,
+      )
+      .subscribe();
+  }
 
   return () => {
     isActive = false;
-    supabase.removeChannel(channel);
+    if (channel) {
+      supabase.removeChannel(channel);
+    }
   };
 }
 
+// El archivo de imagen se sube directamente a Supabase Storage (infraestructura)
+// y a la API/Prisma se envia la URL publica resultante.
 async function uploadDishImage(file) {
+  if (!supabase) {
+    throw new Error("Supabase no está configurado (faltan variables de entorno).");
+  }
+
   const fileExt = file.name.split(".").pop();
   const filePath = `${crypto.randomUUID()}.${fileExt}`;
 
@@ -77,37 +111,15 @@ async function resolveImage(image) {
   return image;
 }
 
-async function resolveCategoryId(categoryName) {
-  const { data, error } = await supabase
-    .from(CATEGORIES_TABLE)
-    .select("id")
-    .eq("name", categoryName)
-    .maybeSingle();
-
-  if (error) {
-    throw error;
-  }
-
-  if (!data) {
-    throw new Error(`Categoria desconocida: ${categoryName}`);
-  }
-
-  return data.id;
-}
-
 export async function createDish({ category, ...dish }) {
-  const [image, category_id] = await Promise.all([
-    resolveImage(dish.image),
-    resolveCategoryId(category),
-  ]);
+  const image = await resolveImage(dish.image);
 
-  const { error } = await supabase
-    .from(DISHES_TABLE)
-    .insert({ ...dish, image, category_id });
-
-  if (error) {
-    throw error;
-  }
+  // La API resuelve category_id por nombre y crea el platillo con Prisma.
+  return fetchJson(`${API_BASE}/dishes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ ...dish, image, category }),
+  });
 }
 
 export async function updateDish(id, { category, ...dish }) {
@@ -118,23 +130,23 @@ export async function updateDish(id, { category, ...dish }) {
   }
 
   if (category !== undefined) {
-    payload.category_id = await resolveCategoryId(category);
+    payload.category = category;
   }
 
-  const { error } = await supabase
-    .from(DISHES_TABLE)
-    .update(payload)
-    .eq("id", id);
-
-  if (error) {
-    throw error;
-  }
+  return fetchJson(`${API_BASE}/dishes/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
 }
 
 export async function deleteDish(id) {
-  const { error } = await supabase.from(DISHES_TABLE).delete().eq("id", id);
+  const response = await fetch(`${API_BASE}/dishes/${id}`, {
+    method: "DELETE",
+  });
 
-  if (error) {
-    throw error;
+  if (!response.ok) {
+    const body = await response.json().catch(() => null);
+    throw new Error(body?.error ?? `Error ${response.status}`);
   }
 }

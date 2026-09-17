@@ -1,0 +1,41 @@
+// prisma/schema.prisma
+// Modelos sincronizados con el esquema real de Supabase.
+// Fuente: supabase/schema.sql (la migración ejecutada en Supabase).
+//
+// Cuando exista DATABASE_URL en el entorno local (.env), se puede
+// sincronizar/verificar con:
+//   npx prisma db pull
+//   npx prisma validate
+// No se crean tablas nuevas: estas tablas ya existen en la base de Supabase.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Categorias de platillos (entidad normalizada; antes era texto libre).
+model categories {
+  id     String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name   String   @unique
+  dishes dishes[]
+
+  @@map("categories")
+}
+
+/// Platillos del menu (reemplaza la coleccion "dishes" de Firestore).
+model dishes {
+  id          String       @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  name        String
+  description String?
+  price       Decimal      @default(0) @db.Decimal
+  category_id String?      @db.Uuid
+  image       String?
+  visible     Boolean      @default(true)
+  created_at  DateTime     @default(now()) @db.Timestamptz(6)
+  categories  categories?  @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@map("dishes")
+}

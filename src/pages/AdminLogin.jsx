@@ -9,7 +9,7 @@ function AdminLogin() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [error] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(event) {
